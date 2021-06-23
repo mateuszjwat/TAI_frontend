@@ -1,28 +1,22 @@
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
 import Home from './components/Home';
-import PublicFiszki from './components/PublicFiszki';
 import NavigationBar from './components/NavigationBar';
-import MyFiszkas from './components/Fiszki/MyFiszkas';
-import AddFiszka from './components/Fiszki/AddFiszka';
-import FiszkaSite from './components/Fiszki/FiszkaSite';
-import FiszkaLearn from './components/Fiszki/Learn';
-import FiszkaTest from './components/Fiszki/Test';
 import Profile from './components/Profile';
-import Game from './components/Fiszki/Game';
-
 import Login from './components/Login/Login';
 import SignUp from './components/Login/SignUp';
+import MyChildren from './components/Parents/MyChildren';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React, { useState } from 'react';
+import ChildSite from './components/Parents/ChildSite';
 
 
 function App() {
   
   const [user, setUser] = useState(null);
-  const [fiszka, setFiszka] = useState(null);
+  const [child, setChild] = useState(null);
 
   return (
     <div className="App">
@@ -37,29 +31,14 @@ function App() {
         <Route exact path="/">
           <Home user={user}/>
         </Route>
-        <Route path="/PublicFiszki">
-          <PublicFiszki setFiszka={setFiszka}/>
-        </Route>
-        <Route path="/myFiszkas">
-          <MyFiszkas user={user} setUser={setUser} setFiszka={setFiszka}/>
-        </Route>
-        <Route path="/addFiszka">
-          <AddFiszka user={user} setUser={setUser}/>
-        </Route>
-        <Route exact path="/fiszkaSite">
-          <FiszkaSite fiszka={fiszka} setFiszka={setFiszka}/>
-        </Route>
-        <Route path="/fiszkaLearn">
-          <FiszkaLearn fiszka={fiszka} setFiszka={setFiszka} />
-        </Route>
-        <Route path="/game">
-          <Game fiszka={fiszka} setFiszka={setFiszka} />
-        </Route>
-        <Route path="/fiszkaTest">
-          <FiszkaTest fiszka={fiszka} setFiszka={setFiszka} user={user}/>
-        </Route>
         <Route path="/profile">
           <Profile user={user} />
+        </Route>
+        <Route path="/myChildren">
+          <MyChildren user={user} setChild={setChild}/>
+        </Route>
+        <Route path="/childSite">
+          <ChildSite user={user} child={child} setChild={setChild}/>
         </Route>
       </Router>
     </div>

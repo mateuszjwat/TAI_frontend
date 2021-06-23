@@ -2,8 +2,11 @@ import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
 import { Card, CardGroup } from 'react-bootstrap';
 import { Container, Row, Col } from 'react-bootstrap';
-  
+import useChangeTitle from './ChangeTitle';  
+
 function Home (props){
+
+    useChangeTitle("Family tables");
 
     let welcome;
     if(props.user){

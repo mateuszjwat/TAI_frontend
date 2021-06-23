@@ -10,20 +10,16 @@ function NavigationBar(props) {
 
     let loginNav = <Navbar.Brand>Login</Navbar.Brand>;
     if (!props.user){
-        //console.log("z navBara: niezalogowany");
         loginNav = <Navbar.Brand>Login</Navbar.Brand>;
     } else{
-        //console.log("z navBara: zalogowany");
         loginNav = <Navbar.Brand onClick={logOut}>LogOut</Navbar.Brand>;
     }
 
     return (
+        <div>
         <Navbar bg="dark" variant="dark" expand="lg">
         <LinkContainer to="/">
             <Navbar.Brand>Home</Navbar.Brand>
-        </LinkContainer>
-        <LinkContainer to="/PublicFiszki">
-            <Navbar.Brand>Fiszki</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">
@@ -39,24 +35,23 @@ function NavigationBar(props) {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+      <div style={{height: 30}}></div>
+      </div>
     );
 
 
     function NavBarLogged(){
         if(props.user){
             return(
-                <NavDropdown className="mr-auto" title="Twój profil" id="collasible-nav-dropdown">
-                    <NavDropdown.Item>
-                        <LinkContainer to="/profile">
-                            <Nav.Item>Profil</Nav.Item>
-                        </LinkContainer>
-                    </NavDropdown.Item>
-                    <NavDropdown.Item>
-                        <LinkContainer to="/myFiszkas">
-                            <Nav.Item>Twoje zestawy</Nav.Item>
-                        </LinkContainer>
-                    </NavDropdown.Item>
-                </NavDropdown>
+               <Nav>
+                    <LinkContainer to="/profile">
+                        <Navbar.Brand>Your profile</Navbar.Brand>
+                    </LinkContainer>
+                    {props.user.isParent &&
+                    <LinkContainer to="/myChildren">
+                        <Navbar.Brand>Your children</Navbar.Brand>
+                    </LinkContainer>}
+                </Nav>
             );
         } else {
             return <div></div>;

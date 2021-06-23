@@ -1,14 +1,17 @@
 import React from 'react';
 import { useState } from 'react';
 import {Button, Card} from 'react-bootstrap'
-import LoginFetch from './LoginFetch';
 import { Alert } from 'react-bootstrap';
 import {useHistory} from 'react-router-dom'
+import ApiShooter from '../ApiShooter';
+import useChangeTitle from '../ChangeTitle';
 
 
 function Login (props){
 
     let history = useHistory();
+
+    useChangeTitle("Fiszki Login");
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -17,10 +20,12 @@ function Login (props){
 
     function handleLogin(e){
         e.preventDefault();
-        LoginFetch.login(username, password).then(response => {
+        ApiShooter.login(username, password).then(res => {
+            console.log(res);
             let newUser = {
                 username: username,
-                token: response.data.token
+                token: res.data.token,
+                isParent: res.data.parent
             }
 
             props.setUser(newUser);
@@ -41,27 +46,27 @@ function Login (props){
                     <Card.Header>Witaj!</Card.Header>
                     <Card.Body>
                         <form className="login-form" onSubmit={handleLogin} autoComplete="on">
-                            <h3 class='text-center'>Zaloguj się</h3>
+                            <h3 class='text-center'>Sign In</h3>
 
                             <div className="form-group">
-                                <label>Wpisz Username</label>
+                                <label>Enter Username</label>
                                 <input type="username" className="form-control" placeholder="username" onChange={(e) => setUsername(e.target.value)}/>
                             </div>
 
                             <div className="form-group">
-                                <label>Wpisz Hasło</label>
+                                <label>Enter password</label>
                                 <input type="password" className="form-control" placeholder="hasło" onChange={(e) => setPassword(e.target.value)} />
                             </div>
 
                             <button value="Login" type="submit" className="btn btn-primary btn-block">Submit</button>
                             {errorForm
-                                ? <Alert variant="danger"> Złe dane logowania! </Alert>
+                                ? <Alert variant="danger"> Bad login credentials! </Alert>
                                 : <br/>
                             }
                             
                             <p className="forgot-password text-right">
-                                Nie masz konta? 
-                                <a href="/signUp">Zarejestruj się</a>
+                                Don't have account? 
+                                <a href="/signUp">Sign Up!</a>
                             </p>
                         </form>
                     </Card.Body>

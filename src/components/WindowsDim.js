@@ -15,12 +15,12 @@ export default function useWindowDimensions() {
     }, []);
   
     return windowDimensions;
-  }
+}
 
-  function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window;
-    return {
-      width,
-      height
-    };
-  }
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}

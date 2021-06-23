@@ -1,13 +1,13 @@
 import { Col, Row } from "react-bootstrap";
 
-export default function BuildCards({cards, width}){
+export default function BuildCards({cards, width, largeGap, mediumGap, smallGap}){
         const resultsRender = [];
 
-        let gap = 4;
+        let gap = largeGap;
         if(width < 992)
-            gap = 2;
+            gap = mediumGap;
         if(width < 768)
-            gap = 1;
+            gap = smallGap;
         
         let rest = 0;
         if(cards.length > gap)

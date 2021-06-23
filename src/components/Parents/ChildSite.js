@@ -12,6 +12,7 @@ import useWindowDimensions from "../WindowsDim";
 import { useEffect } from "react";
 import Popup from "reactjs-popup";
 import UpdateAccount from "../Login/UpdateAccount";
+import useChangeTitle from "../ChangeTitle";
 
 
 export default function ChildSite(props){
@@ -22,9 +23,14 @@ export default function ChildSite(props){
     const [password, setPassword] = useState("");
     const [token, setToken] = useState(null);
 
-
-    if(!props.child)
+    let title="childSite";
+    if(props.child)
+        title=props.child.realName;
+    else
         history.push("/");
+
+    useChangeTitle(title);
+       
     
     if(props.child){
 

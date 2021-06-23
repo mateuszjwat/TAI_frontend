@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import { Card, Button, ListGroup, ListGroupItem, Jumbotron } from "react-bootstrap";
 import ApiShooter from "../ApiShooter";
 import BuildCards from "../BuildCards";
+import useChangeTitle from "../ChangeTitle";
 
 export default function Duties(props){
     const [duties, setDuties] = useState([]);
+
+    useChangeTitle("Duties");
 
     useEffect(() => {
         if(props.user)

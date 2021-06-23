@@ -3,11 +3,14 @@ import ApiShooter from "../ApiShooter";
 import { Table, ButtonGroup, Button, Card, Form } from "react-bootstrap";
 import { useHistory } from "react-router";
 import Popup from "reactjs-popup";
+import useChangeTitle from "../ChangeTitle";
 
 export default function MyChildren(props){
     const [data, setData] = useState(null);
     const [token, setToken] = useState(null);
     let history = useHistory();
+
+    useChangeTitle("children table");
 
     useEffect(() => {
         if(props.user)

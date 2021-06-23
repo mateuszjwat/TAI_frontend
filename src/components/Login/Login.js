@@ -11,7 +11,7 @@ function Login (props){
 
     let history = useHistory();
 
-    useChangeTitle("Fiszki Login");
+    useChangeTitle("Family tables Login");
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");

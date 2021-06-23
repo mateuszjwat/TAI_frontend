@@ -1,4 +1,4 @@
-import {Button, Card} from 'react-bootstrap'  
+import {Spinner, Alert, Card} from 'react-bootstrap'  
 import React, { useState } from 'react'
 import {useHistory} from 'react-router-dom'
 import useChangeTitle from '../ChangeTitle';
@@ -14,17 +14,20 @@ function SignUp (props){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [realName, setRealName] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [errorForm, setErrorForm] = useState(false);
 
     const handleLogin = (e) => {
         e.preventDefault();
-
+        setLoading(true);
         if(!props.user){
             ApiShooter.register(realName, username, password).then((response) => {
                 if(response.status == 200){
                     history.push('/login');
                 }
             }).catch(err => {
-                console.log(err.response.data);
+                setErrorForm(true);
+                setLoading(false);
             });
         } else {
             let data = {
@@ -34,6 +37,9 @@ function SignUp (props){
             }
             ApiShooter.registerChild(props.user.token, data).then(res => {
                 history.push("/myChildren");
+            }).catch(err => {
+                setErrorForm(true);
+                setLoading(false);
             })
         }
     };
@@ -73,6 +79,10 @@ function SignUp (props){
                         </div>
                         <button className="btn btn-primary btn-block" type="submit">Sign Up</button>
                     </form>
+                    {errorForm
+                                ? <Alert variant="danger"> Bad credentials, username taken? </Alert>
+                                : <br/>
+                    }
                 </Card.Body>
             </Card>
             </div>

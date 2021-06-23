@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import {Button, Card} from 'react-bootstrap'
+import {Spinner, Card} from 'react-bootstrap'
 import { Alert } from 'react-bootstrap';
 import {useHistory} from 'react-router-dom'
 import ApiShooter from '../ApiShooter';
@@ -16,10 +16,12 @@ function Login (props){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorForm, setErrorForm] = useState(false);
+    const [loading, setLoading] = useState(false);
 
 
     function handleLogin(e){
         e.preventDefault();
+        setLoading(true);
         ApiShooter.login(username, password).then(res => {
             console.log(res);
             let newUser = {
@@ -31,10 +33,9 @@ function Login (props){
 
             props.setUser(newUser);
             history.push('/');
-            console.log(newUser.token);
         }).catch(err => {
             setErrorForm(true);
-            console.log("złe passwordy");
+            setLoading(false);
         });
     }
 
@@ -46,6 +47,10 @@ function Login (props){
                 <Card style={{ width: '30rem' }}>
                     <Card.Header>Witaj!</Card.Header>
                     <Card.Body>
+                        {loading &&
+                        <Spinner animation="border" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner>}
                         <form className="login-form" onSubmit={handleLogin} autoComplete="on">
                             <h3 class='text-center'>Sign In</h3>
 

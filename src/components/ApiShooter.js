@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = "https://tai-children-parents-backend.herokuapp.com/api";
 const API_AUTH = API_URL + "/auth";
 const API_PARENT = API_URL + "/parent";
+const API_CHILD = API_URL + "/child"
 
 function makeHeader(token){
     const header = {
@@ -33,6 +34,10 @@ const updateChildAccount = (token, data, childId) => {
     return axios.put(API_PARENT + "/updateChildInfo?childId="+childId, data, makeHeader(token));
 }
 
+const updateAccount = (token, data) => {
+    return axios.put(API_AUTH + "/updateAccount", data, makeHeader(token));
+}
+
 const login = (username, password) => {
     return axios.post(API_AUTH + "/signIn", {
         username,
@@ -56,6 +61,14 @@ const deleteChildFromParent = (token, childId) => {
     return axios.delete(API_PARENT + "/deleteChild?childId="+childId, makeHeader(token))
 }
 
+const getDuties = (token) => {
+    return axios.get(API_CHILD + "/duties", makeHeader(token));
+}
+
+const finishDuty = (token, dutyId) => {
+    return axios.delete(API_CHILD + "/finishDuty?dutyId=" + dutyId, makeHeader(token));
+}
+
 export default{
     getChildren,
     addDuty,
@@ -65,5 +78,8 @@ export default{
     login,
     register,
     addTokenChild,
-    deleteChildFromParent
+    deleteChildFromParent,
+    updateAccount,
+    getDuties,
+    finishDuty
 }

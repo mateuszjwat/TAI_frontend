@@ -24,6 +24,7 @@ function Login (props){
             console.log(res);
             let newUser = {
                 username: username,
+                realName: res.data.realName,
                 token: res.data.token,
                 isParent: res.data.parent
             }

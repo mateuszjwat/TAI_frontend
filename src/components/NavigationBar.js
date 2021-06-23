@@ -47,10 +47,15 @@ function NavigationBar(props) {
                     <LinkContainer to="/profile">
                         <Navbar.Brand>Your profile</Navbar.Brand>
                     </LinkContainer>
-                    {props.user.isParent &&
+                    {props.user.isParent?
                     <LinkContainer to="/myChildren">
                         <Navbar.Brand>Your children</Navbar.Brand>
-                    </LinkContainer>}
+                    </LinkContainer>:
+                    <LinkContainer to="/duties">
+                        <Navbar.Brand>My duties</Navbar.Brand>
+                    </LinkContainer>
+                    }
+
                 </Nav>
             );
         } else {

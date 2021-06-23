@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React, { useState } from 'react';
 import ChildSite from './components/Parents/ChildSite';
+import Duties from './components/Children/Duties';
 
 
 function App() {
@@ -32,13 +33,16 @@ function App() {
           <Home user={user}/>
         </Route>
         <Route path="/profile">
-          <Profile user={user} />
+          <Profile user={user} setUser={setUser}/>
         </Route>
         <Route path="/myChildren">
           <MyChildren user={user} setChild={setChild}/>
         </Route>
         <Route path="/childSite">
           <ChildSite user={user} child={child} setChild={setChild}/>
+        </Route>
+        <Route path="/duties">
+          <Duties user={user}/>
         </Route>
       </Router>
     </div>

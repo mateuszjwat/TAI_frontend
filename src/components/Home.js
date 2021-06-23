@@ -10,9 +10,9 @@ function Home (props){
 
     let welcome;
     if(props.user){
-        welcome = <h1 class="display-2">Witaj ponownie {props.user.username}</h1>
+        welcome = <h3 class="display-4">Welcome back {props.user.username}</h3>
     } else {
-        welcome = <h1 class="display-2">Witaj na najlepszej stronie z fiszkami!</h1>
+        welcome = <h3 class="display-4">Welcome to best duty planner site!</h3>
     }
 
     function Zaleta({tytul, opis}) { 
@@ -57,20 +57,15 @@ function Home (props){
             {welcome}
 
         <div >
-      {/* <footer style={{float: 'right'}}>
-        <p className="text-muted h4">
-          Specjalne podziękowania dla <cite title="Source Title">Oli Kotuszewskiej</cite>
-        </p>
-      </footer> */}
       </div>
         </Jumbotron>
         
-        <h1 class="text-center display-4" style={{height:130}}> Zalety fiszek</h1>
+        <h1 class="text-center display-4" style={{height:130}}> Family tables pros</h1>
  
         <Row sm="1" xs="1" md="3">
-        <Col><Zaleta tytul="Proste w obsłudze!" opis="Proste w użyciu i przyjazne dla nowych użytkowników. Masz do nich dostęp przez cały czas, gdy tylko jesteś online ;)" /></Col>
-        <Col><Zaleta tytul="Szybka nauka!" opis="Fiszki pozwalają na skuteczną i efektywną naukę nowych słów czy innych skojarzeń" /></Col>
-        <Col><Zaleta tytul="Wciągające!" opis="Fiszki są wciągające, bo działają jak test. Wystarczy tapnąć w ekran lub obrócić papierową fiszkę i już wiesz, czy znałeś odpowiedź. Nauka w ten sposób sprawia, że jesteś cały czas zangażowany." /></Col>
+        <Col><Zaleta tytul="Easy to use!" opis="Very easy to use planning table, accessible from anywhere!" /></Col>
+        <Col><Zaleta tytul="Effective!" opis="Give away duties to your children in very effictive verifiable way!" /></Col>
+        <Col><Zaleta tytul="Recommended!" opis="Recommended by all users worldwide!" /></Col>
         </Row>
 
 

@@ -54,7 +54,7 @@ function SignUp (props){
                 <Card.Header>{tekst}</Card.Header>
                 <Card.Body>
                     <form onSubmit={handleLogin} autocomplete="on">
-                        <h3 class='text-center'>Make new child account!</h3>
+                        <h3 class='text-center'>Make new {props.user && "child"} account!</h3>
                         <br/>
 
                         <div className="form-group" autoComplete="on">

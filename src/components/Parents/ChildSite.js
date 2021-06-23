@@ -11,6 +11,7 @@ import { withWidth } from "@material-ui/core";
 import useWindowDimensions from "../WindowsDim";
 import { useEffect } from "react";
 import Popup from "reactjs-popup";
+import UpdateAccount from "../Login/UpdateAccount";
 
 
 export default function ChildSite(props){
@@ -18,20 +19,9 @@ export default function ChildSite(props){
     const [startDate, setStartDate] = useState(new Date());
     const [message, setMessage] = useState("");
     const {width, height} = useWindowDimensions();
+    const [password, setPassword] = useState("");
     const [token, setToken] = useState(null);
 
-    const [username, setUsername] = useState("");
-    const [realName, setRealName] = useState("");
-    const [password, setPassword] = useState("");
-    const [show, setShow] = useState(false);
-
-    useEffect(() => {
-        if(props.child){
-            setUsername(props.child.username);
-            setRealName(props.child.realName);
-            setPassword("");
-        }
-    }, []);
 
     if(!props.child)
         history.push("/");
@@ -42,17 +32,6 @@ export default function ChildSite(props){
             ApiShooter.login(props.child.username, password).then(res => {
                 setToken(res.data.token);
                 navigator.clipboard.writeText(res.data.token);
-            })
-        }
-
-        function updateChildInfo(childId){
-            let data = {
-                password,
-                username,
-                realName
-            }
-            ApiShooter.updateChildAccount(props.user.token, data, childId ).then(res => {
-                setShow(true);
             })
         }
 
@@ -137,38 +116,8 @@ export default function ChildSite(props){
                         </Card>         
                         
                         <div style={{height:30}}></div>
-                        <Card className="addShadow">
-                            <Card.Body>
-                                <Card.Header>
-                                    <Card.Title>Update Child's account</Card.Title>
-                                </Card.Header>
-                                <Form>
-                                    <div style={{height:30}}></div>
-                                    <Form.Group>
-                                        <Form.Label><b>Username </b></Form.Label>
-                                        <Form.Control type="username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <Form.Label><b>Real Name </b></Form.Label>
-                                        <Form.Control type="text" value={realName} onChange={(e) => setRealName(e.target.value)} />
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <Form.Label><b>Password </b></Form.Label>
-                                        <Form.Control type="password" placeholder="enter new password" onChange={(e) => setPassword(e.target.value)} />
-                                    </Form.Group>
-                                </Form>
-                            </Card.Body>
-                            <OverlayTrigger
-                                placement="top"
-                                delay={{ show: 250, hide: 400 }}
-                                overlay={<Tooltip id="button-tooltip-2">Account updated!</Tooltip>}
-                                show={show}
-                            >
-                                <Button onClick={() => updateChildInfo(props.child.id)}>
-                                    Update child's info
-                                </Button>
-                            </OverlayTrigger>
-                        </Card>                       
+                        <UpdateAccount user={props.user} child={props.child}/>
+
                     </Col>
                 </Row>
             </Container>

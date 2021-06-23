@@ -30,8 +30,9 @@ export default function ChildSite(props){
         history.push("/");
 
     useChangeTitle(title);
-    console.log(startDate);
-    
+
+    var options = { year: 'numeric', month: 'numeric', month: '2-digit', day: '2-digit'};
+
     if(props.child){
 
         function handleGetToken(){
@@ -42,10 +43,11 @@ export default function ChildSite(props){
         }
 
         function addDuty(){
+            let date = new Intl.DateTimeFormat('en-GB', options).format(startDate);
             let duty = {
                 childId: props.child.id,
                 dutyMessage: message,
-                expiration: startDate
+                expiration: date
             }
             ApiShooter.addDuty(props.user.token, duty).then(res => {
                 let child = {...props.child};
@@ -63,9 +65,10 @@ export default function ChildSite(props){
         }
 
         let cards = props.child.duties.map(duty => {
+
             let today = new Date(new Date().setHours(0,0,0,0));
             let dutyDay = new Date(new Date(duty.expiration).setHours(0,0,0,0));
-         
+
             let variant = "primary";
             if(today > dutyDay){
                 variant = "danger";

@@ -59,6 +59,10 @@ function SignUp (props){
             <Card style={{ width: '30rem' }}>
                 <Card.Header>{tekst}</Card.Header>
                 <Card.Body>
+                    {loading &&
+                    <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>}
                     <form onSubmit={handleLogin} autocomplete="on">
                         <h3 class='text-center'>Make new {props.user && "child"} account!</h3>
                         <br/>

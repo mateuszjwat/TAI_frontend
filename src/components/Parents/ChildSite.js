@@ -30,7 +30,7 @@ export default function ChildSite(props){
         history.push("/");
 
     useChangeTitle(title);
-       
+    console.log(startDate);
     
     if(props.child){
 

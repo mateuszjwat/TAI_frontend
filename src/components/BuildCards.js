@@ -10,8 +10,9 @@ export default function BuildCards({cards, width, largeGap, mediumGap, smallGap}
             gap = smallGap;
         
         let rest = 0;
-        if(cards.length > gap)
-            rest = cards.length % gap;
+        rest = cards.length % gap;
+        if(rest != 0)
+          rest = gap - rest;
 
         let restCol = [];
         for(let i = 0; i < rest; i++){
